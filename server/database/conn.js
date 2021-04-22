@@ -5,15 +5,8 @@ dotenv.config();
 
 const mydatabase = process.env.DATABASE_URL;
 
-// Or 
-// const pool = new Pool({
-//   user: 'dbuser',
-//   host: 'database.server.com',
-//   database: 'mydb',
-//   password: 'secretpassword',
-//   port: 3211,
-// })
-// check here https://node-postgres.com/features/connecting
+console.log(mydatabase, "mydb");
+
 
 const connect = new Pool({
   connectionString: mydatabase,
