@@ -7,7 +7,9 @@ class AuthController {
       (err, response) => {
         console.log(err, 'err')
         const result = JSON.parse(JSON.stringify(response.rows));
-        if (result.length > 0) {
+                console.log(result, 'err')
+
+        if (result) {
           return res.status(201).json({
             status: "success",
             statusCode: 201,
