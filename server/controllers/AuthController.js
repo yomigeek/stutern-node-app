@@ -7,7 +7,7 @@ class AuthController {
     const {email, password, firstname, lastname, phone} = req.body;
 
     connect.query(
-      `INSER INTO users (firstname, lastname, userid, email, password, role, phone)
+      `INSERT INTO users (firstname, lastname, userid, email, password, role, phone)
         VALUES (${firstname}, ${lastname}, ${userId}, ${email}, ${password}, 'user', ${phone})
       `,
       (err, response) => {
