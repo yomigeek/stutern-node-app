@@ -8,7 +8,7 @@ class AuthController {
 
     connect.query(
       `INSERT INTO users (firstname, lastname, userid, email, password, role, phone)
-        VALUES (${firstname}, ${lastname}, ${userId}, ${email}, ${password}, 'user', ${phone})
+        VALUES ('${firstname}', '${lastname}', '${userId}', '${email}', '${password}', 'user', '${phone}')
       `,
       (err, response) => {
         console.log(err, 'err')
