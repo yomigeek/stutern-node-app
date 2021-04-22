@@ -6,8 +6,8 @@ class AuthController {
         "values ('"}${'test'}', '${'test'}', '${req.body.name}','${req.body.name}','${'test'}','user', '${'test'}')`,
       (err, response) => {
         console.log(err, 'err')
+                        console.log(response, 'res')
         const result = JSON.parse(JSON.stringify(response.rows));
-                console.log(result, 'err')
 
         if (result) {
           return res.status(201).json({
