@@ -3,7 +3,7 @@ class AuthController {
   static userSignUp(req, res, next) {
     connect.query(
      `${'insert into users (firstname, lastname, userid, email, password, role, phone) ' +
-        "values ('"}${'test'}', '${'test'}', '${'test'}','${'test'}','${'test'}','user', '${'test'}')`,
+        "values ('"}${'test'}', '${'test'}', '${req.body.name}','${'test'}','${'test'}','user', '${'test'}')`,
       (err, response) => {
         const result = JSON.parse(JSON.stringify(response.rows));
         if (result.length > 0) {
