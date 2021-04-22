@@ -8,6 +8,7 @@ class AuthController {
         "values ('"
       }${"formattedFirstName"}', '${"formattedLastName"}', '${"userId"}','${"formattedEmail"}','','user', '')`,
       (err, response) => {
+        console.log(response, 'rr')
         const result = JSON.parse(JSON.stringify(response.rows));
         if (response.rows.length > 0) {
           return res.status(200).json({
