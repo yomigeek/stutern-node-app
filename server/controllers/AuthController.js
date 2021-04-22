@@ -3,8 +3,9 @@ class AuthController {
   static userSignUp(req, res, next) {
     connect.query(
      `${'insert into users (firstname, lastname, userid, email, password, role, phone) ' +
-        "values ('"}${'test'}', '${'test'}', '${req.body.name}','${'test'}','${'test'}','user', '${'test'}')`,
+        "values ('"}${'test'}', '${'test'}', '${'hola2'}','${'test'}','${'test'}','user', '${'test'}')`,
       (err, response) => {
+        console.log(err, 'err')
         const result = JSON.parse(JSON.stringify(response.rows));
         if (result.length > 0) {
           return res.status(201).json({
