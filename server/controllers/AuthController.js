@@ -5,14 +5,13 @@ class AuthController {
   static userSignUp(req, res, next) {
     const userId = uuidv4();
     const {email, password, firstname, lastname, phone} = req.body;
-    res.status(200).json({
-      message: "success",
-    });
+
     connect.query(
       `INSER INTO users (firstname, lastname, userid, email, password, role, phone)
         VALUES (${firstname}, ${lastname}, ${userId}, ${email}, ${password}, 'user', ${phone})
       `,
       (err, response) => {
+        console.log(err, 'err')
         const result = JSON.parse(JSON.stringify(response.rows));
 
         if (result) {
