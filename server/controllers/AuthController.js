@@ -2,20 +2,21 @@ import connect from "../database/conn";
 class AuthController {
   static userSignUp(req, res, next) {
     connect.query(
-      `SELECT email FROM users WHERE email= '${'mm'}'`,
+     `${'insert into users (firstname, lastname, userid, email, password, role, phone) ' +
+        "values ('"}${'test'}', '${'test'}', '${'test'}','${'test'}','${'test'}','user', '${'test'}')`,
       (err, response) => {
         const result = JSON.parse(JSON.stringify(response.rows));
         if (result.length > 0) {
-          return res.status(409).json({
-            status: "error",
-            statusCode: 409,
-            message: "Email already exist" 
+          return res.status(201).json({
+            status: "success",
+            statusCode: 201,
+            message: "registered" 
           });
         } else {
-        return res.status(200).json({
-            status: "success",
-            statusCode: 200,
-            message: "Email doesnt exist" 
+        return res.status(400).json({
+            status: "error",
+            statusCode: 400,
+            message: "fail" 
           });
         }
       }
