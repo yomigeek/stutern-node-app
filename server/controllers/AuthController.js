@@ -4,7 +4,7 @@ class AuthController {
     // insert data
     connect.query(
       `${
-        "insert into users (firstname, lastname, userId, email, password, role, phone) " +
+        "insert into users (firstname, lastname, userid, email, password, role, phone) " +
         "values ('"
       }${"formattedFirstName"}', '${"formattedLastName"}', '${"userId"}','${"formattedEmail"}','','user', '')`,
       (err, response) => {
