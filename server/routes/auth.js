@@ -12,6 +12,7 @@ authRouter.post(
 authRouter.post(
     "/signup",
     CheckConflicts.validateUserDetail,
+    CheckConflicts.existingUser,
     AuthController.userSignUp
   );
 

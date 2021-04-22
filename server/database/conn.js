@@ -5,6 +5,7 @@ dotenv.config();
 
 const mydatabase = process.env.DATABASE_URL;
 
+console.log(mydatabase)
 // Or 
 // const pool = new Pool({
 //   user: 'dbuser',
