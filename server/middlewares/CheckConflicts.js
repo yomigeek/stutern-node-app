@@ -4,7 +4,7 @@ class CheckConflicts {
   static validateUserDetail(req, res, next) {
     const {password, phone, email} = req.body;
 
-    if (!password.trim() || !phone.trim() || !email.trim()) {
+    if (!password || !phone || !email) {
       return res.status(400).json({
         status: "error",
         message: "Password, phone and email are required",
@@ -42,6 +42,7 @@ class CheckConflicts {
       connect.query(
           `SELECT email FROM users WHERE email='${email}'`,
           (err, response) => {
+              console.log(err, 'err')
               const result = JSON.parse(JSON.stringify(response.rows));
               if(result.length > 0) {
                 return res.status(409).json({

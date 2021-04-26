@@ -1,20 +1,23 @@
 import connect from "../database/conn";
 import {v4 as uuidv4} from "uuid";
+import bcrypt from 'bcryptjs';
 
 class AuthController {
   static userSignUp(req, res, next) {
     const userId = uuidv4();
     const {email, password, firstname, lastname, phone} = req.body;
+    const hashedPassword = bcrypt.hashSync(password, 10); 
 
     connect.query(
       `INSERT INTO users (firstname, lastname, userid, email, password, role, phone)
-        VALUES ('${firstname}', '${lastname}', '${userId}', '${email}', '${password}', 'user', '${phone}')
+        VALUES ('${firstname}', '${lastname}', '${userId}', '${email}', '${hashedPassword}', 'user', '${phone}')
       `,
       (err, response) => {
         console.log(err, 'err')
         console.log(response, 'result')
         const result = JSON.parse(JSON.stringify(response.rows));
         console.log(result, 'result')
+        
         if (result) {
           return res.status(201).json({
             status: "success",
