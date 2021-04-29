@@ -1,23 +1,23 @@
 import connect from "../database/conn";
 import {v4 as uuidv4} from "uuid";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 class AuthController {
   static userSignUp(req, res, next) {
     const userId = uuidv4();
     const {email, password, firstName, lastName, phone} = req.body;
-    const hashedPassword = bcrypt.hashSync(password, 10); 
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
     connect.query(
       `INSERT INTO users (firstname, lastname, userid, email, password, role, phone)
         VALUES ('${firstName}', '${lastName}', '${userId}', '${email}', '${hashedPassword}', 'user', '${phone}')
       `,
       (err, response) => {
-        console.log(err, 'err')
-        console.log(response, 'result')
+        console.log(err, "err");
+        console.log(response, "result");
         const result = JSON.parse(JSON.stringify(response.rows));
-        console.log(result, 'result')
-        
+        console.log(result, "result");
+
         if (result) {
           return res.status(201).json({
             status: "success",
@@ -58,24 +58,25 @@ class AuthController {
     // );
   }
   static userLogin(req, res) {
-    const {email, password } = req.body;
+    const {email, password} = req.body;
 
     connect.query(
       `SELECT * FROM users WHERE email = '${email}'`,
       (err, response) => {
-        console.log(err, 'err')
-        console.log(response, 'result')
+        console.log(err, "err");
+        console.log(response, "result");
         const result = JSON.parse(JSON.stringify(response.rows));
-        console.log(result, 'result')
-        console.log(result[0], 'main result')
-        
-        // return res.status(200).json({
-        //       status: "success",
-        //       statusCode: 200,
-        //       message: "login successful",
-        //     });
+        console.log(result, "result");
+        console.log(result[0], "main result");
 
         if (result.length > 0) {
+          const checkPassword = bcrypt.compareSync(
+            password,
+            result[0].password
+          );
+
+          console.log(checkPassword, 'cp')
+          
           return res.status(200).json({
             status: "success",
             statusCode: 200,
@@ -90,8 +91,6 @@ class AuthController {
         }
       }
     );
-
-
   }
 }
 
