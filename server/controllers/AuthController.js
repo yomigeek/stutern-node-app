@@ -69,25 +69,25 @@ class AuthController {
         console.log(result, 'result')
         console.log(result[0], 'main result')
         
-        return res.status(200).json({
-              status: "success",
-              statusCode: 200,
-              message: "login successful",
-            });
+        // return res.status(200).json({
+        //       status: "success",
+        //       statusCode: 200,
+        //       message: "login successful",
+        //     });
 
-        // if (result) {
-        //   return res.status(201).json({
-        //     status: "success",
-        //     statusCode: 201,
-        //     message: "signup successful",
-        //   });
-        // } else {
-        //   return res.status(400).json({
-        //     status: "error",
-        //     statusCode: 400,
-        //     message: "fail",
-        //   });
-        // }
+        if (result.length > 0) {
+          return res.status(200).json({
+            status: "success",
+            statusCode: 200,
+            message: "login successful",
+          });
+        } else {
+          return res.status(400).json({
+            status: "error",
+            statusCode: 400,
+            message: "Email or Password is wrong",
+          });
+        }
       }
     );
 
