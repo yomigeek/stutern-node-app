@@ -75,13 +75,20 @@ class AuthController {
             result[0].password
           );
 
-          console.log(checkPassword, 'cp')
-          
-          return res.status(200).json({
-            status: "success",
-            statusCode: 200,
-            message: "login successful",
-          });
+          if(checkPassword) {
+            return res.status(200).json({
+              status: "success",
+              statusCode: 200,
+              message: "login successful",
+            });
+          } else {
+            return res.status(400).json({
+              status: "error",
+              statusCode: 400,
+              message: "Email or Password is wrong",
+            });
+          }
+        
         } else {
           return res.status(400).json({
             status: "error",
