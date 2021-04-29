@@ -6,6 +6,7 @@ const authRouter = Router();
 
 authRouter.post(
   "/login",
+  CheckConflicts.validateLoginDetail,
   AuthController.userLogin
 );
 

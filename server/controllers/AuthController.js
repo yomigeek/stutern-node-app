@@ -58,10 +58,39 @@ class AuthController {
     // );
   }
   static userLogin(req, res) {
+    const {email, password } = req.body;
 
-    res.status(200).json({
-      message: "success",
-    });
+    connect.query(
+      `SELECT * FROM users WHERE email =${email}`,
+      (err, response) => {
+        console.log(err, 'err')
+        console.log(response, 'result')
+        const result = JSON.parse(JSON.stringify(response.rows));
+        console.log(result, 'result')
+        console.log(result[0], 'main result')
+        
+        return res.status(200).json({
+              status: "success",
+              statusCode: 200,
+              message: "login successful",
+            });
+
+        // if (result) {
+        //   return res.status(201).json({
+        //     status: "success",
+        //     statusCode: 201,
+        //     message: "signup successful",
+        //   });
+        // } else {
+        //   return res.status(400).json({
+        //     status: "error",
+        //     statusCode: 400,
+        //     message: "fail",
+        //   });
+        // }
+      }
+    );
+
 
   }
 }
