@@ -5,12 +5,12 @@ import bcrypt from 'bcryptjs';
 class AuthController {
   static userSignUp(req, res, next) {
     const userId = uuidv4();
-    const {email, password, firstname, lastname, phone} = req.body;
+    const {email, password, firstName, lastName, phone} = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10); 
 
     connect.query(
       `INSERT INTO users (firstname, lastname, userid, email, password, role, phone)
-        VALUES ('${firstname}', '${lastname}', '${userId}', '${email}', '${hashedPassword}', 'user', '${phone}')
+        VALUES ('${firstName}', '${lastName}', '${userId}', '${email}', '${hashedPassword}', 'user', '${phone}')
       `,
       (err, response) => {
         console.log(err, 'err')
@@ -62,7 +62,7 @@ class AuthController {
     res.status(200).json({
       message: "success",
     });
-    
+
   }
 }
 
