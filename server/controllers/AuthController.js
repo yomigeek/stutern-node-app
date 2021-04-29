@@ -61,7 +61,7 @@ class AuthController {
     const {email, password } = req.body;
 
     connect.query(
-      `SELECT * FROM users WHERE email =${email}`,
+      `SELECT * FROM users WHERE email = '${email}'`,
       (err, response) => {
         console.log(err, 'err')
         console.log(response, 'result')
