@@ -83,7 +83,8 @@ class AuthController {
               firstName: result[0].firstName,
               lastName: result[0].lastName,
               userId: result[0].userid,
-            }
+              expiryTime: "500h"
+            };
             const token = Token.generateToken(tokenData);
             return res.status(200).json({
               status: "success",
