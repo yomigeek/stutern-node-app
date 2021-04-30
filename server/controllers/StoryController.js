@@ -6,6 +6,7 @@ import Token from "./../utils/Token";
 class StoryController {
   static addStory(req, res, next) {
     const {title, description} = req.body;
+    console.log(req.decoded, 'dec')
     return res.status(201).json({
       status: "success",
       statusCode: 201,
@@ -13,7 +14,7 @@ class StoryController {
         title,
         description,
       },
-      message: "story added successful",
+      message: "story added successfully",
     });
   }
 }
