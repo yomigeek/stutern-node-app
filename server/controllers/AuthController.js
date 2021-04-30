@@ -1,6 +1,7 @@
 import connect from "../database/conn";
 import {v4 as uuidv4} from "uuid";
 import bcrypt from "bcryptjs";
+import Token from './../utils/Token';
 
 class AuthController {
   static userSignUp(req, res, next) {
@@ -75,11 +76,20 @@ class AuthController {
             result[0].password
           );
 
-          if(checkPassword) {
+          if(checkPassword) {            
+            const tokenData = {
+              email,
+              role: result[0].role,
+              firstName: result[0].firstName,
+              lastName: result[0].lastName,
+              userId: result[0].userid,
+            }
+            const token = Token.generateToken(tokenData);
             return res.status(200).json({
               status: "success",
               statusCode: 200,
               message: "login successful",
+              token,
             });
           } else {
             return res.status(400).json({
