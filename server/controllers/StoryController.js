@@ -6,16 +6,38 @@ import Token from "./../utils/Token";
 class StoryController {
   static addStory(req, res, next) {
     const {title, description} = req.body;
-    console.log(req.decoded, 'dec')
-    return res.status(201).json({
-      status: "success",
-      statusCode: 201,
-      data: {
-        title,
-        description,
-      },
-      message: "story added successfully",
-    });
+    const storyId = uuidv4();
+    const userId = req.decoded.userId;
+    console.log(req.decoded, "dec");
+    connect.query(
+      `INSERT INTO storys (storyid, userid, title, description)
+          VALUES ('${storyId}', '${userId}', '${title}', '${description}')
+        `,
+      (err, response) => {
+        console.log(err, "err");
+        console.log(response, "result");
+        const result = JSON.parse(JSON.stringify(response.rows));
+        console.log(result, "result");
+
+        if (result) {
+          return res.status(201).json({
+            status: "success",
+            statusCode: 201,
+            data: {
+              title,
+              description,
+            },
+            message: "story added successfully",
+          });
+        } else {
+          return res.status(400).json({
+            status: "error",
+            statusCode: 400,
+            message: "fail",
+          });
+        }
+      }
+    );
   }
 }
 
