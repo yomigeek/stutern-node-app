@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import Token from "./../utils/Token";
 
 class StoryController {
-  static addStory(req, res, next) {
+  static addStory(req, res) {
     const {title, description} = req.body;
     const storyId = uuidv4();
     const userId = req.decoded.userId;
