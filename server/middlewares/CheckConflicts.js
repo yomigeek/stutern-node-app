@@ -75,6 +75,19 @@ class CheckConflicts {
       }
     );
   }
+
+  static validateStoryDetail(req, res, next) {
+    const {title, description} = req.body;
+
+    if (!title || !description) {
+      return res.status(400).json({
+        status: "error",
+        message: "Title and description are required",
+      });
+    }
+
+    next();
+  }
 }
 
 export default CheckConflicts;
