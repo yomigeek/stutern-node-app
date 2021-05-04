@@ -8,6 +8,7 @@ const storyRouter = Router();
 storyRouter.post(
   "/add",
   Token.verifyToken,
+  CheckConflicts.validatePermission,
   CheckConflicts.validateStoryDetail,
   StoryController.addStory
 );

@@ -88,6 +88,19 @@ class CheckConflicts {
 
     next();
   }
+
+  static validatePermission(req, res, next) {
+    const { role } = req.decoded;
+
+    if (role !== "admin") {
+      return res.status(403).json({
+        status: "error",
+        message: "permission denied",
+      });
+    }
+
+    next();
+  }
 }
 
 export default CheckConflicts;
