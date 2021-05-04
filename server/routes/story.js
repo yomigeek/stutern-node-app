@@ -17,6 +17,7 @@ storyRouter.post(
   "/update/:id",
   Token.verifyToken,
   CheckConflicts.validatePermission,
+  CheckConflicts.existingStory,
   CheckConflicts.validateStoryDetail,
   StoryController.updateStory,
 );

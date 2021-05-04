@@ -76,6 +76,24 @@ class CheckConflicts {
     );
   }
 
+  static existingStory(req, res, next) {
+    const storyId = req.params.id;
+    connect.query(
+      `SELECT storyid FROM storys WHERE storyid='${storyId}'`,
+      (err, response) => {
+        console.log(err, "err");
+        const result = JSON.parse(JSON.stringify(response.rows));
+        if (result.length < 1) {
+          return res.status(404).json({
+            status: "error",
+            message: "story id not found",
+          });
+        }
+        next();
+      }
+    );
+  }
+
   static validateStoryDetail(req, res, next) {
     const {title, description} = req.body;
 

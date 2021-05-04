@@ -41,9 +41,9 @@ class StoryController {
   }
 
   static updateStory(req, res) {
-    const { title, description } = req.body;
+    const {title, description} = req.body;
     const storyId = req.params.id;
-    console.log(storyId, 'sid');
+    console.log(storyId, "sid");
     connect.query(
       `UPDATE storys SET title = '${title}', description = '${description}' WHERE  storyid = '${storyId}'`,
       (err, response) => {
@@ -51,16 +51,20 @@ class StoryController {
         console.log(response, "result");
         const result = JSON.parse(JSON.stringify(response.rows));
         console.log(result, "result");
-        return res.status(200).json({
-          status: "success",
-          statusCode: 200,
-          message: "story updated",
-        });
-        // if(result) {
 
-        // }
-
-       
+        if (result) {
+          return res.status(200).json({
+            status: "success",
+            statusCode: 200,
+            message: "story updated",
+          });
+        } else {
+          return res.status(500).json({
+            status: "error",
+            statusCode: 500,
+            message: "story failed to update",
+          });
+        }
       }
     );
   }
