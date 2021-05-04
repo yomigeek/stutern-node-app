@@ -13,4 +13,12 @@ storyRouter.post(
   StoryController.addStory
 );
 
+storyRouter.post(
+  "/update/:id",
+  Token.verifyToken,
+  CheckConflicts.validatePermission,
+  CheckConflicts.validateStoryDetail,
+  StoryController.updateStory,
+);
+
 export default storyRouter;

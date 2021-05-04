@@ -39,6 +39,31 @@ class StoryController {
       }
     );
   }
+
+  static updateStory(req, res) {
+    const { title, description } = req.body;
+    const storyId = req.params.id;
+    console.log(storyId, 'sid');
+    connect.query(
+      `UPDATE storys SET title = '${title}', description = '${description}' WHERE  storyid = '${storyId}'`,
+      (err, response) => {
+        console.log(err, "err");
+        console.log(response, "result");
+        const result = JSON.parse(JSON.stringify(response.rows));
+        console.log(result, "result");
+        return res.status(200).json({
+          status: "success",
+          statusCode: 200,
+          message: "story updated",
+        });
+        // if(result) {
+
+        // }
+
+       
+      }
+    );
+  }
 }
 
 export default StoryController;
