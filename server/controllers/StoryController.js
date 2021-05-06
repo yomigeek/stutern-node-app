@@ -68,6 +68,32 @@ class StoryController {
       }
     );
   }
+
+  static deleteStory(req, res) {
+    const storyId = req.params.id;
+    console.log(storyId, "sid");
+    connect.query(
+      `DELETE FROM storys WHERE storyid = '${storyId}'`,
+      (err, response) => {
+        console.log(err, "err");
+        const result = JSON.parse(JSON.stringify(response.rows));
+
+        if (result) {
+          return res.status(200).json({
+            status: "success",
+            statusCode: 200,
+            message: "story deleted successfully",
+          });
+        } else {
+          return res.status(500).json({
+            status: "error",
+            statusCode: 500,
+            message: "story failed to delete",
+          });
+        }
+      }
+    );
+  }
 }
 
 export default StoryController;

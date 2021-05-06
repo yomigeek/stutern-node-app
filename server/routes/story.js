@@ -22,4 +22,12 @@ storyRouter.post(
   StoryController.updateStory,
 );
 
+storyRouter.delete(
+  "/delete/:id",
+  Token.verifyToken,
+  CheckConflicts.validatePermission,
+  CheckConflicts.existingStory,
+  StoryController.deleteStory,
+);
+
 export default storyRouter;
