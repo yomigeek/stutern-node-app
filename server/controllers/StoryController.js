@@ -98,7 +98,7 @@ class StoryController {
   static searchStory(req, res) {
     const { keyword } = req.body;
     connect.query(
-      `SELECT * FROM storys WHERE title LIKE '%${keyword}%'`,
+      `SELECT * FROM storys WHERE title LIKE '${keyword}%' LIMIT 1`,
       (err, response) => {
         console.log(err, "err");
         const result = JSON.parse(JSON.stringify(response.rows));
