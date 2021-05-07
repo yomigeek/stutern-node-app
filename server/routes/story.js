@@ -30,4 +30,10 @@ storyRouter.delete(
   StoryController.deleteStory,
 );
 
+storyRouter.get(
+  "/search",
+  Token.verifyToken,
+  StoryController.searchStory,
+);
+
 export default storyRouter;

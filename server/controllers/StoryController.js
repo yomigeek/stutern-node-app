@@ -94,6 +94,32 @@ class StoryController {
       }
     );
   }
+
+  static searchStory(req, res) {
+    const { keyword } = req.body;
+    connect.query(
+      `SELECT * FROM storys WHERE title LIKE '%${keyword}%'`,
+      (err, response) => {
+        console.log(err, "err");
+        const result = JSON.parse(JSON.stringify(response.rows));
+        console.log(result, 'res')
+        if (result) {
+          return res.status(200).json({
+            status: "success",
+            statusCode: 200,
+            message: "search complete successfully",
+            result: result[0]
+          });
+        } else {
+          return res.status(500).json({
+            status: "error",
+            statusCode: 500,
+            message: "search failed",
+          });
+        }
+      }
+    );
+  }
 }
 
 export default StoryController;
