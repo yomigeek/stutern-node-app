@@ -108,7 +108,7 @@ class StoryController {
             status: "success",
             statusCode: 200,
             message: "search complete successfully",
-            result: result[0]
+            result,
           });
         } else {
           return res.status(500).json({
